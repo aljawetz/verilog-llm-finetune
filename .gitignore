@@ -1,0 +1,41 @@
+# environment / secrets
+.env
+venv/
+.claude/
+
+# python / OS
+__pycache__/
+*.pyc
+.DS_Store
+
+# third-party data: not redistributed (see README)
+VerilogDB/
+data/train.jsonl
+data/test.jsonl
+data.jsonl
+
+# build and batch artifacts
+sim_build/
+batch_jobs/
+*.zip
+
+# local-only notes (kept on disk, not published)
+CLAUDE.md
+PLAN.md
+TASK.md
+prices.txt
+slides.pdf
+
+# model weights live on Hugging Face
+llama3_2_1b_verilog_finetune/
+
+# local-only slide sources
+slides/
+slides.html
+
+# local images (slide assets), generated data and tooling caches
+images/
+data/grouped/*.jsonl
+*.egg-info/
+.pytest_cache/
+.ruff_cache/

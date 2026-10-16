@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below, and cite VerilogDB for the underlying data."
+title: "Finetuning Llama-3.2-1B for Verilog generation with LLM-generated testbenches"
+type: software
+authors:
+  - family-names: Jawetz
+    given-names: Arthur
+repository-code: "https://github.com/aljawetz/verilog-llm-finetune"
+license: MIT
+date-released: "2026-10-16"
+references:
+  - type: article
+    title: "VerilogDB: The Largest, Highest-Quality Dataset with a Preprocessing Framework for LLM-based RTL Generation"
+    authors:
+      - family-names: Calzada
+        given-names: Paul E.
+    year: 2025
+    notes: "arXiv:2507.13369"

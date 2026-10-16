@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "verilog-ft"
+version = "0.1.0"
+description = "Finetuning small LLMs to write Verilog, scored with simulation-based testbenches"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Arthur Jawetz" }]
+dependencies = []  # core package (prompts, simulation scoring, dataset logic) is stdlib-only
+
+[project.optional-dependencies]
+gen = ["openai>=1.0", "python-dotenv>=1.0"]  # testbench generation via the OpenAI Batch API
+dev = ["pytest>=8", "ruff>=0.5"]
+# Training and inference run in Colab; `pip install unsloth` pins a compatible stack there.
+train = ["unsloth", "peft", "trl", "datasets", "bitsandbytes"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+extend-exclude = ["*.ipynb"]  # Colab notebooks use magics and cell-level imports
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
