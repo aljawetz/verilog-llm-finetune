@@ -1,0 +1,67 @@
+`timescale 1ns/1ps
+
+module tb_mux_2_1;
+
+    // Inputs
+    reg [1:0] i;
+    reg sel;
+
+    // Output
+    wire y_out;
+
+    // Instantiate the Unit Under Test (UUT)
+    mux_2_1 uut (
+        .i(i),
+        .sel(sel),
+        .y_out(y_out)
+    );
+
+    initial begin
+        // Test case 1: sel = 0, expect y_out = i[0]
+        i = 2'b01; sel = 0; #10;
+        if (y_out !== 1'b1) begin
+            $display("FAIL: Test case 1 failed, expected y_out = 1, got %b", y_out);
+            $finish;
+        end
+
+        // Test case 2: sel = 1, expect y_out = i[1]
+        i = 2'b10; sel = 1; #10;
+        if (y_out !== 1'b1) begin
+            $display("FAIL: Test case 2 failed, expected y_out = 1, got %b", y_out);
+            $finish;
+        end
+
+        // Test case 3: sel = 0, expect y_out = i[0]
+        i = 2'b11; sel = 0; #10;
+        if (y_out !== 1'b1) begin
+            $display("FAIL: Test case 3 failed, expected y_out = 1, got %b", y_out);
+            $finish;
+        end
+
+        // Test case 4: sel = 1, expect y_out = i[1]
+        i = 2'b00; sel = 1; #10;
+        if (y_out !== 1'b0) begin
+            $display("FAIL: Test case 4 failed, expected y_out = 0, got %b", y_out);
+            $finish;
+        end
+
+        // Test case 5: sel = 0, expect y_out = i[0]
+        i = 2'b01; sel = 0; #10;
+        if (y_out !== 1'b1) begin
+            $display("FAIL: Test case 5 failed, expected y_out = 1, got %b", y_out);
+            $finish;
+        end
+
+        // Test case 6: sel = 1, expect y_out = i[1]
+        i = 2'b10; sel = 1; #10;
+        if (y_out !== 1'b1) begin
+            $display("FAIL: Test case 6 failed, expected y_out = 1, got %b", y_out);
+            $finish;
+        end
+
+        // If all tests pass
+        $display("PASS");
+        $finish;
+    end
+
+endmodule

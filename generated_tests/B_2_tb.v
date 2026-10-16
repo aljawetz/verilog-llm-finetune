@@ -1,0 +1,52 @@
+`timescale 1ns/1ps
+
+module tb_B;
+  reg x;
+  reg y;
+  wire z;
+
+  // Instantiate the module under test (uut)
+  B uut (
+    .x(x),
+    .y(y),
+    .z(z)
+  );
+
+  initial begin
+    // Test case 1: x = 0, y = 0
+    x = 0; y = 0;
+    #10;
+    if (z !== 1) begin
+      $display("FAIL: Test case 1 failed (x=0, y=0, expected z=1, got z=%b)", z);
+      $finish;
+    end
+
+    // Test case 2: x = 0, y = 1
+    x = 0; y = 1;
+    #10;
+    if (z !== 0) begin
+      $display("FAIL: Test case 2 failed (x=0, y=1, expected z=0, got z=%b)", z);
+      $finish;
+    end
+
+    // Test case 3: x = 1, y = 0
+    x = 1; y = 0;
+    #10;
+    if (z !== 0) begin
+      $display("FAIL: Test case 3 failed (x=1, y=0, expected z=0, got z=%b)", z);
+      $finish;
+    end
+
+    // Test case 4: x = 1, y = 1
+    x = 1; y = 1;
+    #10;
+    if (z !== 1) begin
+      $display("FAIL: Test case 4 failed (x=1, y=1, expected z=1, got z=%b)", z);
+      $finish;
+    end
+
+    // If all tests pass
+    $display("PASS");
+    $finish;
+  end
+endmodule

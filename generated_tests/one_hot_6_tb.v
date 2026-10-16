@@ -1,0 +1,243 @@
+`timescale 1ns/1ps
+
+module tb_one_hot;
+
+  reg [4:0] bin_i;
+  wire [31:0] one_hot_o;
+
+  // Instantiate the module under test (uut)
+  one_hot uut (
+    .bin_i(bin_i),
+    .one_hot_o(one_hot_o)
+  );
+
+  initial begin
+    // Test case 1: Check for bin_i = 0
+    bin_i = 5'b00000; #10;
+    if (one_hot_o !== 32'b00000000000000000000000000000001) begin
+      $display("FAIL: Test case 1 failed for bin_i = 0");
+      $finish;
+    end
+
+    // Test case 2: Check for bin_i = 1
+    bin_i = 5'b00001; #10;
+    if (one_hot_o !== 32'b00000000000000000000000000000010) begin
+      $display("FAIL: Test case 2 failed for bin_i = 1");
+      $finish;
+    end
+
+    // Test case 3: Check for bin_i = 2
+    bin_i = 5'b00010; #10;
+    if (one_hot_o !== 32'b00000000000000000000000000000100) begin
+      $display("FAIL: Test case 3 failed for bin_i = 2");
+      $finish;
+    end
+
+    // Test case 4: Check for bin_i = 3
+    bin_i = 5'b00011; #10;
+    if (one_hot_o !== 32'b00000000000000000000000000001000) begin
+      $display("FAIL: Test case 4 failed for bin_i = 3");
+      $finish;
+    end
+
+    // Test case 5: Check for bin_i = 4
+    bin_i = 5'b00100; #10;
+    if (one_hot_o !== 32'b00000000000000000000000000010000) begin
+      $display("FAIL: Test case 5 failed for bin_i = 4");
+      $finish;
+    end
+
+    // Test case 6: Check for bin_i = 5
+    bin_i = 5'b00101; #10;
+    if (one_hot_o !== 32'b00000000000000000000000000100000) begin
+      $display("FAIL: Test case 6 failed for bin_i = 5");
+      $finish;
+    end
+
+    // Test case 7: Check for bin_i = 6
+    bin_i = 5'b00110; #10;
+    if (one_hot_o !== 32'b00000000000000000000000001000000) begin
+      $display("FAIL: Test case 7 failed for bin_i = 6");
+      $finish;
+    end
+
+    // Test case 8: Check for bin_i = 7
+    bin_i = 5'b00111; #10;
+    if (one_hot_o !== 32'b00000000000000000000000010000000) begin
+      $display("FAIL: Test case 8 failed for bin_i = 7");
+      $finish;
+    end
+
+    // Test case 9: Check for bin_i = 8
+    bin_i = 5'b01000; #10;
+    if (one_hot_o !== 32'b00000000000000000000000100000000) begin
+      $display("FAIL: Test case 9 failed for bin_i = 8");
+      $finish;
+    end
+
+    // Test case 10: Check for bin_i = 9
+    bin_i = 5'b01001; #10;
+    if (one_hot_o !== 32'b00000000000000000000001000000000) begin
+      $display("FAIL: Test case 10 failed for bin_i = 9");
+      $finish;
+    end
+
+    // Test case 11: Check for bin_i = 10
+    bin_i = 5'b01010; #10;
+    if (one_hot_o !== 32'b00000000000000000000010000000000) begin
+      $display("FAIL: Test case 11 failed for bin_i = 10");
+      $finish;
+    end
+
+    // Test case 12: Check for bin_i = 11
+    bin_i = 5'b01011; #10;
+    if (one_hot_o !== 32'b00000000000000000000100000000000) begin
+      $display("FAIL: Test case 12 failed for bin_i = 11");
+      $finish;
+    end
+
+    // Test case 13: Check for bin_i = 12
+    bin_i = 5'b01100; #10;
+    if (one_hot_o !== 32'b00000000000000000001000000000000) begin
+      $display("FAIL: Test case 13 failed for bin_i = 12");
+      $finish;
+    end
+
+    // Test case 14: Check for bin_i = 13
+    bin_i = 5'b01101; #10;
+    if (one_hot_o !== 32'b00000000000000000010000000000000) begin
+      $display("FAIL: Test case 14 failed for bin_i = 13");
+      $finish;
+    end
+
+    // Test case 15: Check for bin_i = 14
+    bin_i = 5'b01110; #10;
+    if (one_hot_o !== 32'b00000000000000000100000000000000) begin
+      $display("FAIL: Test case 15 failed for bin_i = 14");
+      $finish;
+    end
+
+    // Test case 16: Check for bin_i = 15
+    bin_i = 5'b01111; #10;
+    if (one_hot_o !== 32'b00000000000000001000000000000000) begin
+      $display("FAIL: Test case 16 failed for bin_i = 15");
+      $finish;
+    end
+
+    // Test case 17: Check for bin_i = 16
+    bin_i = 5'b10000; #10;
+    if (one_hot_o !== 32'b00000000000000010000000000000000) begin
+      $display("FAIL: Test case 17 failed for bin_i = 16");
+      $finish;
+    end
+
+    // Test case 18: Check for bin_i = 17
+    bin_i = 5'b10001; #10;
+    if (one_hot_o !== 32'b00000000000000100000000000000000) begin
+      $display("FAIL: Test case 18 failed for bin_i = 17");
+      $finish;
+    end
+
+    // Test case 19: Check for bin_i = 18
+    bin_i = 5'b10010; #10;
+    if (one_hot_o !== 32'b00000000000001000000000000000000) begin
+      $display("FAIL: Test case 19 failed for bin_i = 18");
+      $finish;
+    end
+
+    // Test case 20: Check for bin_i = 19
+    bin_i = 5'b10011; #10;
+    if (one_hot_o !== 32'b00000000000010000000000000000000) begin
+      $display("FAIL: Test case 20 failed for bin_i = 19");
+      $finish;
+    end
+
+    // Test case 21: Check for bin_i = 20
+    bin_i = 5'b10100; #10;
+    if (one_hot_o !== 32'b00000000000100000000000000000000) begin
+      $display("FAIL: Test case 21 failed for bin_i = 20");
+      $finish;
+    end
+
+    // Test case 22: Check for bin_i = 21
+    bin_i = 5'b10101; #10;
+    if (one_hot_o !== 32'b00000000001000000000000000000000) begin
+      $display("FAIL: Test case 22 failed for bin_i = 21");
+      $finish;
+    end
+
+    // Test case 23: Check for bin_i = 22
+    bin_i = 5'b10110; #10;
+    if (one_hot_o !== 32'b00000000010000000000000000000000) begin
+      $display("FAIL: Test case 23 failed for bin_i = 22");
+      $finish;
+    end
+
+    // Test case 24: Check for bin_i = 23
+    bin_i = 5'b10111; #10;
+    if (one_hot_o !== 32'b00000000100000000000000000000000) begin
+      $display("FAIL: Test case 24 failed for bin_i = 23");
+      $finish;
+    end
+
+    // Test case 25: Check for bin_i = 24
+    bin_i = 5'b11000; #10;
+    if (one_hot_o !== 32'b00000001000000000000000000000000) begin
+      $display("FAIL: Test case 25 failed for bin_i = 24");
+      $finish;
+    end
+
+    // Test case 26: Check for bin_i = 25
+    bin_i = 5'b11001; #10;
+    if (one_hot_o !== 32'b00000010000000000000000000000000) begin
+      $display("FAIL: Test case 26 failed for bin_i = 25");
+      $finish;
+    end
+
+    // Test case 27: Check for bin_i = 26
+    bin_i = 5'b11010; #10;
+    if (one_hot_o !== 32'b00000100000000000000000000000000) begin
+      $display("FAIL: Test case 27 failed for bin_i = 26");
+      $finish;
+    end
+
+    // Test case 28: Check for bin_i = 27
+    bin_i = 5'b11011; #10;
+    if (one_hot_o !== 32'b00001000000000000000000000000000) begin
+      $display("FAIL: Test case 28 failed for bin_i = 27");
+      $finish;
+    end
+
+    // Test case 29: Check for bin_i = 28
+    bin_i = 5'b11100; #10;
+    if (one_hot_o !== 32'b00010000000000000000000000000000) begin
+      $display("FAIL: Test case 29 failed for bin_i = 28");
+      $finish;
+    end
+
+    // Test case 30: Check for bin_i = 29
+    bin_i = 5'b11101; #10;
+    if (one_hot_o !== 32'b00100000000000000000000000000000) begin
+      $display("FAIL: Test case 30 failed for bin_i = 29");
+      $finish;
+    end
+
+    // Test case 31: Check for bin_i = 30
+    bin_i = 5'b11110; #10;
+    if (one_hot_o !== 32'b01000000000000000000000000000000) begin
+      $display("FAIL: Test case 31 failed for bin_i = 30");
+      $finish;
+    end
+
+    // Test case 32: Check for bin_i = 31
+    bin_i = 5'b11111; #10;
+    if (one_hot_o !== 32'b10000000000000000000000000000000) begin
+      $display("FAIL: Test case 32 failed for bin_i = 31");
+      $finish;
+    end
+
+    $display("PASS");
+    $finish;
+  end
+
+endmodule

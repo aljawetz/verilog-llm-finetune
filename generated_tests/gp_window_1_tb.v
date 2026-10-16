@@ -1,0 +1,78 @@
+`timescale 1ns/1ps
+
+module tb_gp_window;
+
+    // Inputs
+    reg g_iplus1;
+    reg gi;
+    reg p_iplus1;
+    reg pi;
+
+    // Outputs
+    wire g_window;
+    wire p_window;
+
+    // Instantiate the Unit Under Test (UUT)
+    gp_window uut (
+        .g_iplus1(g_iplus1),
+        .gi(gi),
+        .p_iplus1(p_iplus1),
+        .pi(pi),
+        .g_window(g_window),
+        .p_window(p_window)
+    );
+
+    initial begin
+        // Test case 1: All inputs low
+        g_iplus1 = 0; gi = 0; p_iplus1 = 0; pi = 0;
+        #10;
+        if (g_window !== 0 || p_window !== 0) begin
+            $display("FAIL: Test case 1 failed");
+            $finish;
+        end
+
+        // Test case 2: g_iplus1 high
+        g_iplus1 = 1; gi = 0; p_iplus1 = 0; pi = 0;
+        #10;
+        if (g_window !== 1 || p_window !== 0) begin
+            $display("FAIL: Test case 2 failed");
+            $finish;
+        end
+
+        // Test case 3: gi high, p_iplus1 low
+        g_iplus1 = 0; gi = 1; p_iplus1 = 0; pi = 0;
+        #10;
+        if (g_window !== 0 || p_window !== 0) begin
+            $display("FAIL: Test case 3 failed");
+            $finish;
+        end
+
+        // Test case 4: p_iplus1 high, pi high
+        g_iplus1 = 0; gi = 0; p_iplus1 = 1; pi = 1;
+        #10;
+        if (g_window !== 0 || p_window !== 1) begin
+            $display("FAIL: Test case 4 failed");
+            $finish;
+        end
+
+        // Test case 5: gi high, p_iplus1 high
+        g_iplus1 = 0; gi = 1; p_iplus1 = 1; pi = 0;
+        #10;
+        if (g_window !== 1 || p_window !== 0) begin
+            $display("FAIL: Test case 5 failed");
+            $finish;
+        end
+
+        // Test case 6: All inputs high
+        g_iplus1 = 1; gi = 1; p_iplus1 = 1; pi = 1;
+        #10;
+        if (g_window !== 1 || p_window !== 1) begin
+            $display("FAIL: Test case 6 failed");
+            $finish;
+        end
+
+        $display("PASS");
+        $finish;
+    end
+
+endmodule

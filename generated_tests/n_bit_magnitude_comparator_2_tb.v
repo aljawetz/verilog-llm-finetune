@@ -1,0 +1,59 @@
+`timescale 1ns/1ps
+
+module tb_n_bit_magnitude_comparator;
+
+  reg [3:0] A;
+  reg [3:0] B;
+  wire L_T, G_T, E;
+
+  // Instantiate the module under test (uut)
+  n_bit_magnitude_comparator uut (
+    .A(A),
+    .B(B),
+    .L_T(L_T),
+    .G_T(G_T),
+    .E(E)
+  );
+
+  initial begin
+    // Test case 1: A < B
+    A = 4'b0010; // 2
+    B = 4'b0100; // 4
+    #10;
+    if (L_T !== 1'b1 || G_T !== 1'b0 || E !== 1'b0) 
+      $display("FAIL: Test case 1 failed (A < B)");
+    
+    // Test case 2: A > B
+    A = 4'b0110; // 6
+    B = 4'b0011; // 3
+    #10;
+    if (L_T !== 1'b0 || G_T !== 1'b1 || E !== 1'b0) 
+      $display("FAIL: Test case 2 failed (A > B)");
+
+    // Test case 3: A == B
+    A = 4'b0101; // 5
+    B = 4'b0101; // 5
+    #10;
+    if (L_T !== 1'b0 || G_T !== 1'b0 || E !== 1'b1) 
+      $display("FAIL: Test case 3 failed (A == B)");
+
+    // Test case 4: A < B (edge case)
+    A = 4'b0000; // 0
+    B = 4'b0001; // 1
+    #10;
+    if (L_T !== 1'b1 || G_T !== 1'b0 || E !== 1'b0) 
+      $display("FAIL: Test case 4 failed (A < B edge case)");
+
+    // Test case 5: A > B (edge case)
+    A = 4'b1111; // 15
+    B = 4'b1110; // 14
+    #10;
+    if (L_T !== 1'b0 || G_T !== 1'b1 || E !== 1'b0) 
+      $display("FAIL: Test case 5 failed (A > B edge case)");
+
+    // If all tests pass
+    $display("PASS");
+    $finish;
+  end
+
+endmodule

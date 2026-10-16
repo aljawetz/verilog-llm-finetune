@@ -1,0 +1,52 @@
+`timescale 1ns/1ps
+
+module tb_demux;
+
+  reg i;
+  reg s;
+  wire y0;
+  wire y1;
+
+  // Instantiate the module under test (uut)
+  demux uut (
+    .i(i),
+    .s(s),
+    .y0(y0),
+    .y1(y1)
+  );
+
+  initial begin
+    // Test sequence
+    // Test case 1: s = 0, i = 1
+    i = 1; s = 0; #10;
+    if (y0 !== 1'b1 || y1 !== 1'b0) begin
+      $display("FAIL: Test case 1 failed (s=0, i=1)");
+      $finish;
+    end
+
+    // Test case 2: s = 0, i = 0
+    i = 0; s = 0; #10;
+    if (y0 !== 1'b0 || y1 !== 1'b0) begin
+      $display("FAIL: Test case 2 failed (s=0, i=0)");
+      $finish;
+    end
+
+    // Test case 3: s = 1, i = 1
+    i = 1; s = 1; #10;
+    if (y0 !== 1'b0 || y1 !== 1'b1) begin
+      $display("FAIL: Test case 3 failed (s=1, i=1)");
+      $finish;
+    end
+
+    // Test case 4: s = 1, i = 0
+    i = 0; s = 1; #10;
+    if (y0 !== 1'b0 || y1 !== 1'b0) begin
+      $display("FAIL: Test case 4 failed (s=1, i=0)");
+      $finish;
+    end
+
+    $display("PASS");
+    $finish;
+  end
+
+endmodule

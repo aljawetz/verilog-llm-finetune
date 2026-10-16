@@ -1,0 +1,69 @@
+`timescale 1ns/1ps
+
+module half_adder_tb;
+
+  // Inputs
+  reg a;
+  reg b;
+
+  // Outputs
+  wire sum;
+  wire carry;
+
+  // Instantiate the half_adder module
+  half_adder uut (
+    .a(a),
+    .b(b),
+    .sum(sum),
+    .carry(carry)
+  );
+
+  initial begin
+    // Test case 1: 0 + 0
+    a = 0; b = 0;
+    #10;
+    if (sum !== 0 || carry !== 0) begin
+      $display("FAIL: Test case 1 failed (0 + 0)");
+      $finish;
+    end
+
+    // Test case 2: 0 + 1
+    a = 0; b = 1;
+    #10;
+    if (sum !== 1 || carry !== 0) begin
+      $display("FAIL: Test case 2 failed (0 + 1)");
+      $finish;
+    end
+
+    // Test case 3: 1 + 0
+    a = 1; b = 0;
+    #10;
+    if (sum !== 1 || carry !== 0) begin
+      $display("FAIL: Test case 3 failed (1 + 0)");
+      $finish;
+    end
+
+    // Test case 4: 1 + 1
+    a = 1; b = 1;
+    #10;
+    if (sum !== 0 || carry !== 1) begin
+      $display("FAIL: Test case 4 failed (1 + 1)");
+      $finish;
+    end
+
+    // If all tests pass
+    $display("PASS");
+    $finish;
+  end
+
+endmodule
+
+module half_adder (
+  input a,
+  input b,
+  output sum,
+  output carry
+);
+  assign sum = a ^ b;
+  assign carry = a & b;
+endmodule

@@ -1,0 +1,74 @@
+`timescale 1ns/1ps
+
+module tb_elevator;
+  reg clk;
+  reg rst;
+  reg ra, rb, rc, rd;
+  wire [1:0] floor;
+
+  // Instantiate the elevator module
+  elevator uut (
+    .clk(clk),
+    .rst(rst),
+    .ra(ra),
+    .rb(rb),
+    .rc(rc),
+    .rd(rd),
+    .floor(floor)
+  );
+
+  // Clock generation
+  initial begin
+    clk = 0;
+    forever #5 clk = ~clk; // 10ns clock period
+  end
+
+  // Test sequence
+  initial begin
+    // Initialize inputs
+    rst = 1;
+    ra = 0; rb = 0; rc = 0; rd = 0;
+    #10; // Wait for reset to take effect
+    rst = 0;
+
+    // Test case 1: Request to go to floor B
+    ra = 0; rb = 1; rc = 0; rd = 0; // Request for floor B
+    #10;
+    if (floor !== 2'b01) $display("FAIL: Expected floor B (01), got %b", floor);
+
+    // Test case 2: Request to go to floor C
+    ra = 0; rb = 0; rc = 1; rd = 0; // Request for floor C
+    #10;
+    if (floor !== 2'b10) $display("FAIL: Expected floor C (10), got %b", floor);
+
+    // Test case 3: Request to go to floor D
+    ra = 0; rb = 0; rc = 0; rd = 1; // Request for floor D
+    #10;
+    if (floor !== 2'b11) $display("FAIL: Expected floor D (11), got %b", floor);
+
+    // Test case 4: Request to go to floor A
+    ra = 1; rb = 0; rc = 0; rd = 0; // Request for floor A
+    #10;
+    if (floor !== 2'b00) $display("FAIL: Expected floor A (00), got %b", floor);
+
+    // Test case 5: Multiple requests
+    ra = 0; rb = 1; rc = 1; rd = 0; // Request for floor B and C
+    #10;
+    if (floor !== 2'b10) $display("FAIL: Expected floor C (10), got %b", floor);
+
+    // Test case 6: Reset functionality
+    rst = 1; // Assert reset
+    #10;
+    if (floor !== 2'b00) $display("FAIL: Expected floor A (00) after reset, got %b", floor);
+    
+    rst = 0; // Deassert reset
+    #10;
+
+    // Final check to ensure the elevator is back to floor A
+    if (floor !== 2'b00) $display("FAIL: Expected floor A (00) after reset, got %b", floor);
+
+    // If all tests pass
+    $display("PASS");
+    $finish;
+  end
+endmodule

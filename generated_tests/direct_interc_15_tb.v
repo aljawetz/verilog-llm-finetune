@@ -1,0 +1,58 @@
+`timescale 1ns/1ps
+
+module tb_direct_interc;
+
+//----- INPUT PORTS -----
+reg [0:0] in;
+
+//----- OUTPUT PORTS -----
+wire [0:0] out;
+
+// Instantiate the module under test (uut)
+direct_interc uut (
+    .in(in),
+    .out(out)
+);
+
+// Clock and reset generation
+initial begin
+    // Initialize input
+    in = 1'b0;
+
+    // Test sequence
+    #10; // Wait for 10 time units
+    if (out !== 1'b0) begin
+        $display("FAIL: Output should be 0 when input is 0");
+        $finish;
+    end
+
+    // Change input
+    in = 1'b1;
+    #10; // Wait for 10 time units
+    if (out !== 1'b1) begin
+        $display("FAIL: Output should be 1 when input is 1");
+        $finish;
+    end
+
+    // Change input back to 0
+    in = 1'b0;
+    #10; // Wait for 10 time units
+    if (out !== 1'b0) begin
+        $display("FAIL: Output should be 0 when input is 0");
+        $finish;
+    end
+
+    // Change input to 1 again
+    in = 1'b1;
+    #10; // Wait for 10 time units
+    if (out !== 1'b1) begin
+        $display("FAIL: Output should be 1 when input is 1");
+        $finish;
+    end
+
+    // All tests passed
+    $display("PASS");
+    $finish;
+end
+
+endmodule
