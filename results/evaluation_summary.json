@@ -1,0 +1,36 @@
+{
+  "model": "meta-llama/Llama-3.2-1B-Instruct",
+  "method": "QLoRA (4-bit NF4 + LoRA fp16)",
+  "testbench_generation_cost_usd": 17.63,
+  "clean_subset": {
+    "file": "data/test_ids_dedup.txt",
+    "details": "results/clean_subset_results.json",
+    "size": 390,
+    "seed": 42,
+    "temperature": 0.2,
+    "baseline": {
+      "passed": 8,
+      "total": 390,
+      "pass_at_1": 0.021,
+      "ci95": [
+        0.01,
+        0.04
+      ]
+    },
+    "finetuned": {
+      "passed": 118,
+      "total": 390,
+      "pass_at_1": 0.303,
+      "ci95": [
+        0.259,
+        0.35
+      ]
+    },
+    "paired": {
+      "gained": 113,
+      "lost": 3,
+      "both_pass": 5
+    }
+  },
+  "metric": "pass@1 (iverilog + vvp, LLM-generated testbench, no Error:/Failed/FAIL lines)"
+}
